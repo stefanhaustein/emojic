@@ -13,7 +13,7 @@ import org.flowgrid.emojic.logic.CombinationNode;
 import org.flowgrid.emojic.logic.Node;
 import org.flowgrid.emojic.logic.NotNode;
 import org.flowgrid.emojic.logic.PropertyNode;
-import org.kobjects.android.TextHelper;
+import org.kobjects.emoji.android.TextHelper;
 import org.kobjects.emoji.Emoji;
 import org.kobjects.emoji.Emoji.Property;
 
@@ -105,7 +105,7 @@ public class GameActivity extends Activity {
     map(Property.RAIL_VEHICLE, R.drawable.rail_vehicle);
     map(Property.RED, R.drawable.red);
     map(Property.SQUARE, R.drawable.square);
-    map(Property.SWIMMING, R.drawable.swimming);
+    map(Property.SWIMMING_OR_FLOATING, R.drawable.swimming);
     map(Property.TRIANGLE, R.drawable.triangle);
     map(Property.YELLOW, R.drawable.yellow);
   }
@@ -180,7 +180,7 @@ public class GameActivity extends Activity {
     RelativeLayout.LayoutParams questionParams = 
         (RelativeLayout.LayoutParams) questionView.getLayoutParams();
     questionParams.width = LayoutParams.MATCH_PARENT;
-    questionParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+    questionParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 //    questionView.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
     
     scoreView = new TextView(this);
@@ -189,7 +189,7 @@ public class GameActivity extends Activity {
     gameView.addView(scoreView);
     RelativeLayout.LayoutParams scoreParams = 
         (RelativeLayout.LayoutParams) scoreView.getLayoutParams();
-    scoreParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+    scoreParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
     scoreParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
     highScoreView = new TextView(this);
@@ -198,7 +198,7 @@ public class GameActivity extends Activity {
     gameView.addView(highScoreView);
     RelativeLayout.LayoutParams highScoreParams = 
         (RelativeLayout.LayoutParams) highScoreView.getLayoutParams();
-    highScoreParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+    highScoreParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
     highScoreParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 
 
@@ -232,7 +232,8 @@ public class GameActivity extends Activity {
   void resetGame() {
     time = 60;
     score = 0;
-    addScore(0);
+    highScoreView.setText("Move matches to the title right, others left.");
+    scoreView.setText("");
     level = 0;
     gameOver = false;
   }
@@ -336,7 +337,7 @@ public class GameActivity extends Activity {
       gameView.addView(shape);
       shape.setPos(
           Math.random() * (screenWidth - shapeSize * 3) + shapeSize, 
-          count / 5f * (screenHeight - shapeSize * 4) + shapeSize / 2);
+          count / 5f * (screenHeight - shapeSize * 4) + shapeSize * 1.5f);
       shape.getLayoutParams().width = shapeSize;
       shape.getLayoutParams().height = shapeSize;
       shape.setDraggable(true);
