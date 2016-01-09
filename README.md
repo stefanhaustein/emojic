@@ -1,4 +1,4 @@
-# EmojiC
+# Emojic
 
 A simple Android demo application utilizing https://github.com/kobjects/emoji
 
@@ -7,6 +7,3 @@ The purpose of the app is to have some fun while learning simple logical formula
 
 The app name is supposed to be a combination of the words "emoji" and "logic".
 
-The source code for this app is available at https://github.com/stefanhaustein/EmojiC
-
-READ MORE
