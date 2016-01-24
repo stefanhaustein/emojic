@@ -1,12 +1,7 @@
 package org.flowgrid.emojic;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.TreeSet;
 
 import org.flowgrid.emojic.logic.CombinationNode;
@@ -19,17 +14,10 @@ import org.kobjects.emoji.Emoji.Property;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.ArcShape;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -316,7 +304,7 @@ public class GameActivity extends Activity {
 
     
     SpannableStringBuilder builder = new SpannableStringBuilder();
-    question.toSpannable(this, builder, drawableMap, null);
+    question.toSpannable(questionView, builder, drawableMap, null);
     builder.setSpan(BOLD_SPAN, 0, builder.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
     
     questionView.setText(builder);

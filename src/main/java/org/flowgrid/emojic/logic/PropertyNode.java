@@ -6,9 +6,12 @@ import org.kobjects.emoji.Emoji;
 import org.kobjects.emoji.Emoji.Property;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
+import android.widget.TextView;
 
 public class PropertyNode implements Node {
   private Property property;
@@ -41,14 +44,21 @@ public class PropertyNode implements Node {
   }
 
   @Override
-  public void toSpannable(Context context, SpannableStringBuilder builder,
+  public void toSpannable(TextView view, SpannableStringBuilder builder,
       HashMap<Property, Integer> drawablemap, Object parent) {
     Integer id = drawablemap.get(property);
     if (id == null) {
       builder.append(property.toString());
     } else {
       builder.append(" ");
-      builder.setSpan(new ImageSpan(context, id.intValue()),
+      Drawable icon = ContextCompat.getDrawable(view.getContext(), id);
+
+      float targetSize = view.getTextSize();
+      float scale = targetSize / icon.getIntrinsicHeight();
+
+      icon.setBounds(0, 0, (int) (icon.getIntrinsicWidth() * scale), (int) targetSize);
+
+      builder.setSpan(new ImageSpan(icon, ImageSpan.ALIGN_BOTTOM),
           builder.length() - 1, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
   }

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.widget.TextView;
 
 public class NotNode implements Node {
   
@@ -34,10 +35,10 @@ public class NotNode implements Node {
   }
 
   @Override
-  public void toSpannable(Context context, SpannableStringBuilder builder,
+  public void toSpannable(TextView view, SpannableStringBuilder builder,
       HashMap<Property, Integer> drawablemap, Object parent) {
     builder.append("\u00ac");
     builder.setSpan(RED_SPAN, builder.length() - 1, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-    child.toSpannable(context, builder, drawablemap, this);
+    child.toSpannable(view, builder, drawablemap, this);
   }
 }

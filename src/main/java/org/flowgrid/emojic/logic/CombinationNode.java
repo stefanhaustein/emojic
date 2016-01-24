@@ -9,6 +9,7 @@ import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.widget.TextView;
 
 public class CombinationNode implements Node {
   
@@ -44,20 +45,20 @@ public class CombinationNode implements Node {
   }
 
   @Override
-  public void toSpannable(Context context, SpannableStringBuilder builder,
+  public void toSpannable(TextView view, SpannableStringBuilder builder,
       HashMap<Property, Integer> drawablemap, Object parent) {
     boolean braces = parent != null && parent != type;
     if (braces) {
       builder.append("(");
     }
-    left.toSpannable(context, builder, drawablemap, type);
+    left.toSpannable(view, builder, drawablemap, type);
     builder.append((type == Type.AND ? " \u2227 " : " \u2228 "));
     ForegroundColorSpan span = type == Type.AND ? VIOLET_SPAN : GREEN_SPAN;
     
     builder.setSpan(span, builder.length() - 2, builder.length() - 1, 
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     
-    right.toSpannable(context, builder, drawablemap, type);
+    right.toSpannable(view, builder, drawablemap, type);
     if (braces) {
       builder.append(")");
     }
