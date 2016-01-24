@@ -7,3 +7,4 @@ The purpose of the app is to have some fun while learning simple logical formula
 
 The app name is supposed to be a combination of the words "emoji" and "logic".
 
+Download Emojic from the Play Store here: https://play.google.com/store/apps/details?id=org.flowgrid.emojic
