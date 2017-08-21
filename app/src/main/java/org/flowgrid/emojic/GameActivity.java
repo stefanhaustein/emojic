@@ -1,6 +1,7 @@
 package org.flowgrid.emojic;
 
 import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.widget.EmojiTextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -36,6 +37,8 @@ import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+
+import static android.support.annotation.Dimension.PX;
 
 public class GameActivity extends Activity {
   final StyleSpan BOLD_SPAN = new StyleSpan(android.graphics.Typeface.BOLD);
@@ -326,16 +329,14 @@ public class GameActivity extends Activity {
       shape.setPos(
           Math.random() * (screenWidth - shapeSize * 3) + shapeSize, 
           count / 5f * (screenHeight - shapeSize * 4) + shapeSize * 1.5f);
-      shape.getLayoutParams().width = shapeSize;
-      shape.getLayoutParams().height = shapeSize;
       shape.setDraggable(true);
       count++;
     }
   }
 
-  class Shape extends View {
+  class Shape extends EmojiTextView {
     int codepoint;
-    CharSequence text;
+  //  CharSequence text;
     boolean draggable;
     float lastX;
     float lastY;
@@ -348,18 +349,15 @@ public class GameActivity extends Activity {
       this.codepoint = codepoint;
       char[] chars = new char[2];
       Character.toChars(codepoint, chars, 0);
-      text = EmojiCompat.get().process(new String(chars));
+      setText(new String(chars));
+      setTextSize(PX, shapeSize / 3);
+      setBackgroundColor(0x0ff888888);
     }
     
     public void setDraggable(boolean b) {
       this.draggable = b;
     }
 
-    @Override
-    public void onDraw(Canvas canvas) {
-      canvas.drawText(text, 0, 2, 0, -shapePaint.ascent(), shapePaint);
-    }
-    
     @Override
     public boolean onTouchEvent(MotionEvent event) {
       if (!draggable) {
@@ -392,7 +390,7 @@ public class GameActivity extends Activity {
 
       return false;
     }
-    
+
     public float getX() {
       return x;
     }
@@ -400,7 +398,7 @@ public class GameActivity extends Activity {
     public float getY() {
       return y;
     }
-    
+
     void drop(boolean side) {
       Emoji emoji = Emoji.map.get(codepoint);
       if (question.matches(emoji) == side) {
@@ -424,10 +422,12 @@ public class GameActivity extends Activity {
     }
 
     void setPos(double x, double y) {
+      setX((float) x);
+      setY((float) y);
       this.x = (float) x;
       this.y = (float) y;
-      ((MarginLayoutParams) getLayoutParams()).leftMargin = (int) x;
-      ((MarginLayoutParams) getLayoutParams()).topMargin = (int) y;
+      /*      ((MarginLayoutParams) getLayoutParams()).leftMargin = (int) x;
+      ((MarginLayoutParams) getLayoutParams()).topMargin = (int) y; */
     }
   }
   

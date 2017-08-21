@@ -10,6 +10,7 @@ public class EmojiCompatApplication extends Application {
         super.onCreate();
 
         final EmojiCompat.Config config = new BundledEmojiCompatConfig(getApplicationContext());
+        config.setReplaceAll(true);
         EmojiCompat.init(config);
     }
 
