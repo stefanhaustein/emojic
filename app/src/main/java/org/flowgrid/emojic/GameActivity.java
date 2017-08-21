@@ -1,6 +1,5 @@
 package org.flowgrid.emojic;
 
-import android.support.text.emoji.EmojiCompat;
 import android.support.text.emoji.widget.EmojiTextView;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,20 +24,18 @@ import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
-import static android.support.annotation.Dimension.PX;
+import static android.util.TypedValue.COMPLEX_UNIT_PX;
 
 public class GameActivity extends Activity {
   final StyleSpan BOLD_SPAN = new StyleSpan(android.graphics.Typeface.BOLD);
@@ -136,7 +133,7 @@ public class GameActivity extends Activity {
     trueShape = new TextView(this);
     trueShape.setText(" \u2714 ");
     trueShape.setTextColor(Color.WHITE);
-    trueShape.setTextSize(TypedValue.COMPLEX_UNIT_PX, shapeSize * 0.66f);
+    trueShape.setTextSize(COMPLEX_UNIT_PX, shapeSize * 0.66f);
     gameView.addView(trueShape);
     RelativeLayout.LayoutParams trueParams = 
         (RelativeLayout.LayoutParams) trueShape.getLayoutParams();
@@ -149,7 +146,7 @@ public class GameActivity extends Activity {
     falseShape = new TextView(this);
     falseShape.setText(" \u2716 ");
     falseShape.setTextColor(Color.WHITE);
-    falseShape.setTextSize(TypedValue.COMPLEX_UNIT_PX, shapeSize * 0.66f);
+    falseShape.setTextSize(COMPLEX_UNIT_PX, shapeSize * 0.66f);
     gameView.addView(falseShape);
     RelativeLayout.LayoutParams falseParams = 
         (RelativeLayout.LayoutParams) falseShape.getLayoutParams();
@@ -162,7 +159,7 @@ public class GameActivity extends Activity {
     // Question and score
     
     questionView = new TextView(this);
-    questionView.setTextSize(TypedValue.COMPLEX_UNIT_PX, shapeFontSize / 1.5f);
+    questionView.setTextSize(COMPLEX_UNIT_PX, shapeFontSize / 1.5f);
     int padding = shapeFontSize / 5;
     questionView.setGravity(Gravity.CENTER);
     questionView.setBackgroundColor(Color.LTGRAY);
@@ -175,7 +172,7 @@ public class GameActivity extends Activity {
 //    questionView.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
     
     scoreView = new TextView(this);
-    scoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX, shapeFontSize / 2);
+    scoreView.setTextSize(COMPLEX_UNIT_PX, shapeFontSize / 2);
     scoreView.setPadding(padding, padding, padding, padding);
     gameView.addView(scoreView);
     RelativeLayout.LayoutParams scoreParams = 
@@ -184,7 +181,7 @@ public class GameActivity extends Activity {
     scoreParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
     highScoreView = new TextView(this);
-    highScoreView.setTextSize(TypedValue.COMPLEX_UNIT_PX, shapeFontSize / 2);
+    highScoreView.setTextSize(COMPLEX_UNIT_PX, shapeFontSize / 2);
     highScoreView.setPadding(padding, padding, padding, padding);
     gameView.addView(highScoreView);
     RelativeLayout.LayoutParams highScoreParams = 
@@ -350,8 +347,8 @@ public class GameActivity extends Activity {
       char[] chars = new char[2];
       Character.toChars(codepoint, chars, 0);
       setText(new String(chars));
-      setTextSize(PX, shapeSize / 3);
-      setBackgroundColor(0x0ff888888);
+      setTextSize(COMPLEX_UNIT_PX, shapeSize * 2 / 3);
+      //setBackgroundColor(0x0ff888888);
     }
     
     public void setDraggable(boolean b) {
